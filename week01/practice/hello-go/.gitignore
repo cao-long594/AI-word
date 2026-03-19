@@ -1,0 +1,9 @@
+# Go 可执行文件（重点）
+*.exe
+*.exe~
+*.out
+
+
+# test 目录（重点）
+test/
+tests/
