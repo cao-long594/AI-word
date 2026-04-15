@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵犀 - AI对话助手</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- CDN: Marked.js 用于 Markdown 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <!-- CDN: Highlight.js 用于语法高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 欢迎区域 -->
+            <section id="welcomeSection" class="welcome-section">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">你好，我是灵犀</h1>
+                    <p class="welcome-subtitle">我能帮你什么呢？</p>
+                    <div class="cards-container">
+                        <div class="suggestion-card" data-suggestion="我是一名前端开发初学者，如何提升相关技能？">
+                            <div class="card-icon icon-code">
+                                <svg viewBox="0 0 24 24" width="40" height="40">
+                                    <use href="./assets/icons.svg#icon-code"/>
+                                </svg>
+                            </div>
+                            <p class="card-text">我是一名前端开发初学者，如何提升相关技能？</p>
+                        </div>
+                        <div class="suggestion-card" data-suggestion="有哪些平台又新颖的生日礼物适合送朋友？">
+                            <div class="card-icon icon-gift">
+                                <svg viewBox="0 0 24 24" width="40" height="40">
+                                    <use href="./assets/icons.svg#icon-gift"/>
+                                </svg>
+                            </div>
+                            <p class="card-text">有哪些平台又新颖的生日礼物适合送朋友？</p>
+                        </div>
+                        <div class="suggestion-card" data-suggestion="准备在家里办一个大型家庭聚会，帮我计划。">
+                            <div class="card-icon icon-party">
+                                <svg viewBox="0 0 24 24" width="40" height="40">
+                                    <use href="./assets/icons.svg#icon-party"/>
+                                </svg>
+                            </div>
+                            <p class="card-text">准备在家里办一个大型家庭聚会，帮我计划。</p>
+                        </div>
+                        <div class="suggestion-card" data-suggestion="带小朋友去野餐，有什么好玩的活动建议吗？">
+                            <div class="card-icon icon-play">
+                                <svg viewBox="0 0 24 24" width="40" height="40">
+                                    <use href="./assets/icons.svg#icon-play"/>
+                                </svg>
+                            </div>
+                            <p class="card-text">带小朋友去野餐，有什么好玩的活动建议吗？</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 聊天区域 -->
+            <section id="chatSection" class="chat-section" style="display: none;">
+                <div id="messagesContainer" class="messages-container"></div>
+            </section>
+        </main>
+
+        <!-- 底部输入区域 -->
+        <footer class="input-area">
+            <div class="input-wrapper">
+                <div id="imagePreviewArea" class="image-preview-area"></div>
+                <div class="input-main-row">
+                    <div class="input-controls">
+                        <input type="file" id="imageInput" accept="image/*" multiple style="display: none;">
+                        <button id="uploadBtn" class="input-btn upload-btn" title="上传图片">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <use href="./assets/icons.svg#icon-paperclip"/>
+                            </svg>
+                        </button>
+                        <textarea
+                            id="messageInput"
+                            class="message-input"
+                            placeholder="有问题尽管问我吧"
+                            rows="1"></textarea>
+                        <div class="action-btn-stack">
+                            <button id="sendBtn" class="input-btn send-btn" title="发送" disabled>
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <use href="./assets/icons.svg#icon-send"/>
+                                </svg>
+                            </button>
+                            <button id="stopBtn" class="input-btn stop-btn" title="停止生成" style="display: none;">
+                                <svg viewBox="0 0 24 24" width="20" height="20">
+                                    <use href="./assets/icons.svg#icon-stop"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-side-actions">
+                        <button id="themeToggle" class="footer-btn theme-toggle side-action-btn" title="切换主题">
+                            <svg class="sun-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="./assets/icons.svg#icon-sun"/>
+                            </svg>
+                            <svg class="moon-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="./assets/icons.svg#icon-moon"/>
+                            </svg>
+                        </button>
+                        <button id="clearBtn" class="footer-btn clear-btn side-action-btn" title="清除对话">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <use href="./assets/icons.svg#icon-trash"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-actions">
+                <button id="backToBottomBtn" class="footer-btn back-to-bottom-btn" title="回到最新消息" style="display: none;">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <use href="./assets/icons.svg#icon-arrow-down"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="input-disclaimer">内容由AI大模型生成，请仔细甄别</p>
+        </footer>
+
+        <!-- 消息提示框 -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- API 类 -->
+    <script src="./js/api.js"></script>
+    <!-- 主应用 -->
+    <script src="./js/index.js"></script>
+</body>
+</html>
+

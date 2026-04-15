@@ -1,0 +1,1307 @@
+/* ========================================
+   灵犀 AI 对话助手 - CSS 样式
+   ======================================== */
+
+/* ========================================
+   1. 全局重置与主题变量
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 浅色主题颜色 */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f5f7fa;
+    --color-text-primary: #1a1a1a;
+    --color-text-secondary: #666666;
+    --color-border: #e0e0e0;
+    --color-input-bg: #f0f0f0;
+    --color-btn-hover: #f0f0f0;
+    --color-code-bg: #f5f5f5;
+    --color-primary: #1e90ff;
+    --color-primary-hover: #1c7fd4;
+    --color-gradient-start: #3b82f6;
+    --color-gradient-end: #a855f7;
+
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    /* 深色主题颜色 */
+    --color-bg-primary: #0f1723;
+    --color-bg-secondary: #151f2e;
+    --color-text-primary: #e6edf6;
+    --color-text-secondary: #9fb0c5;
+    --color-border: #223146;
+    --color-input-bg: #1a2638;
+    --color-btn-hover: #223248;
+    --color-code-bg: #1b2739;
+    --color-primary: #5fa8ff;
+    --color-primary-hover: #4b94ea;
+    --color-gradient-start: #5a9dff;
+    --color-gradient-end: #8a7dff;
+
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode,
+body.dark-mode #app,
+body.dark-mode .main-content,
+body.dark-mode .chat-section {
+    background-color: #0f1723;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--color-bg-primary);
+}
+
+/* ========================================
+   2. 主题切换按钮
+   ======================================== */
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-input-bg);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--color-btn-hover);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sun-icon {
+    display: block;
+}
+
+body.dark-mode .sun-icon {
+    display: none;
+}
+
+body.dark-mode .moon-icon {
+    display: block;
+}
+
+.moon-icon {
+    display: none;
+}
+
+/* ========================================
+   3. 主内容区与欢迎页面
+   ======================================== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.welcome-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.welcome-content {
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.welcome-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 3rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.suggestion-card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background-color: var(--color-bg-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.suggestion-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-4px);
+    background-color: var(--color-bg-primary);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.card-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.suggestion-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.icon-code {
+    background: rgba(72, 187, 120, 0.1);
+    color: #48bb78;
+}
+
+.icon-gift {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.icon-party {
+    background: rgba(252, 211, 77, 0.1);
+    color: #fcd34d;
+}
+
+.icon-play {
+    background: rgba(162, 155, 254, 0.1);
+    color: #a29bfe;
+}
+
+.card-text {
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ========================================
+   4. 聊天区域与消息样式
+   ======================================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.ai {
+    justify-content: flex-start;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.message-avatar.ai {
+    width: 40px;
+    height: 40px;
+}
+
+.message-bubble {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message.user .message-bubble {
+    max-width: 50%;
+    background-color: #e4e6eb;
+    color: #1a1a1a;
+    padding: 8px 12px;
+    border-radius: 18px;
+}
+
+body.dark-mode .message.user .message-bubble {
+    background-color: #24354e;
+    color: #e6edf6;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.message.ai .message-bubble {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    color: var(--color-text-primary);
+}
+
+/* ========================================
+   5. Markdown 内容与代码块样式
+   ======================================== */
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3,
+.message-bubble h4,
+.message-bubble h5,
+.message-bubble h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.message-bubble h1 {
+    font-size: 1.8rem;
+}
+
+.message-bubble h2 {
+    font-size: 1.6rem;
+}
+
+.message-bubble h3 {
+    font-size: 1.4rem;
+}
+
+.message-bubble h4,
+.message-bubble h5,
+.message-bubble h6 {
+    font-size: 1.2rem;
+}
+
+.message-bubble p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.message-bubble li {
+    margin-bottom: 0.25rem;
+}
+
+.message-bubble blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    margin: 0.5rem 0;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.message-bubble table {
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.message-bubble table th,
+.message-bubble table td {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.message-bubble table th {
+    background-color: var(--color-input-bg);
+    font-weight: 600;
+}
+
+/* 代码块 - 行内代码 */
+.message-bubble code {
+    display: inline-flex;
+    align-items: center;
+    background-color: #eef5ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    padding: 0.18rem 0.48rem;
+    border-radius: 0.45rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: break-spaces;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+body.dark-mode .message-bubble code {
+    background-color: rgba(37, 99, 235, 0.16);
+    color: #93c5fd;
+    border-color: rgba(96, 165, 250, 0.28);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* 代码块 - 多行代码块 */
+.message-bubble pre {
+    width: 100% !important;
+    background: #f5f5f5 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.9rem 1rem 1rem !important;
+    margin: 0 !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+    box-shadow: none !important;
+}
+
+.message-bubble pre code {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+    display: block !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    box-shadow: none !important;
+}
+
+/* 代码块包装容器（含复制按钮） */
+.code-block-wrapper {
+    width: 100% !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background: #f8fafc !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+    margin: 0.75rem 0 !important;
+    padding: 0 !important;
+}
+
+.code-block-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem !important;
+    background: #eef2f7 !important;
+    border-bottom: 1px solid #d7e0eb !important;
+}
+
+.code-lang {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+}
+
+/* 代码块复制按钮 */
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #cfd8e3;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #f8fafc;
+    transform: translateY(-1px);
+}
+
+.copy-btn.copied {
+    background: rgba(72, 187, 120, 0.20);
+    border-color: rgba(72, 187, 120, 0.35);
+    color: #86efac;
+}
+
+/* 深色模式 - 代码块 */
+body.dark-mode .code-block-wrapper {
+    background: #1a2637 !important;
+    border: none !important;
+    box-shadow: 0 8px 18px rgba(3, 8, 16, 0.35) !important;
+}
+
+body.dark-mode .code-block-header {
+    background: #162235 !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18) !important;
+}
+
+body.dark-mode .code-lang {
+    color: #c7d4e6 !important;
+}
+
+body.dark-mode .message-bubble pre {
+    background: #1f2c40 !important;
+}
+
+body.dark-mode .message-bubble pre code {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+body.dark-mode .copy-btn {
+    background: rgba(159, 176, 197, 0.08);
+    color: #d6e2f2;
+    border-color: rgba(159, 176, 197, 0.22);
+}
+
+body.dark-mode .copy-btn:hover {
+    background: rgba(159, 176, 197, 0.14);
+}
+
+body.dark-mode .copy-btn.copied {
+    background: rgba(72, 187, 120, 0.24);
+    border-color: rgba(134, 239, 172, 0.45);
+    color: #bbf7d0;
+}
+
+/* ========================================
+   6. 聊天区域滚动条样式
+   ======================================== */
+body.dark-mode .chat-section,
+body.dark-mode .message-input,
+body.dark-mode .message-bubble pre {
+    scrollbar-width: thin;
+    scrollbar-color: #5d7088 #1a2637;
+}
+
+body.dark-mode .chat-section::-webkit-scrollbar,
+body.dark-mode .message-input::-webkit-scrollbar,
+body.dark-mode .message-bubble pre::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark-mode .chat-section::-webkit-scrollbar-track,
+body.dark-mode .message-input::-webkit-scrollbar-track,
+body.dark-mode .message-bubble pre::-webkit-scrollbar-track {
+    background: #1a2637;
+    border-radius: 999px;
+}
+
+body.dark-mode .chat-section::-webkit-scrollbar-thumb,
+body.dark-mode .message-input::-webkit-scrollbar-thumb,
+body.dark-mode .message-bubble pre::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6f86a3 0%, #5d7088 100%);
+    border-radius: 999px;
+    border: 2px solid #1a2637;
+}
+
+body.dark-mode .chat-section::-webkit-scrollbar-thumb:hover,
+body.dark-mode .message-input::-webkit-scrollbar-thumb:hover,
+body.dark-mode .message-bubble pre::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7f99b9 0%, #6b8098 100%);
+}
+
+/* ========================================
+   7. 输入区域与交互控件
+   ======================================== */
+.chat-section {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.message {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease;
+    position: relative;
+    align-items: flex-start;
+}
+
+.input-area {
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg-primary);
+    padding: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    position: relative;
+}
+
+.input-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.input-main-row {
+    --input-row-height: 54px;
+    --input-max-height: 220px;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+
+.input-side-actions {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* 图片预览区域 */
+.image-preview-area {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    min-height: 0;
+}
+
+.image-preview {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-preview-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0;
+    z-index: 2;
+}
+
+.image-preview-remove:hover {
+    background-color: #ff3838;
+}
+
+/* 输入容器 */
+.input-controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    flex: 1;
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    min-height: var(--input-row-height);
+    max-height: var(--input-max-height);
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.2s;
+}
+
+.input-controls:focus-within {
+    border-color: var(--color-primary);
+}
+
+/* 通用按钮 */
+.input-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.input-btn:hover {
+    background-color: var(--color-btn-hover);
+}
+
+.input-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* 上传按钮 */
+.upload-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.upload-btn:hover {
+    background-color: var(--color-btn-hover);
+}
+
+/* 发送/停止按钮堆栈 */
+.action-btn-stack {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.action-btn-stack .send-btn,
+.action-btn-stack .stop-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    padding: 0;
+}
+
+/* 发送按钮 */
+
+.send-btn {
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.send-btn svg,
+.stop-btn svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.send-btn:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 8px 18px rgba(59, 130, 246, 0.42);
+    filter: brightness(1.05);
+}
+
+.send-btn:disabled {
+    background: #c0c4cc;
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+}
+
+.send-btn:disabled:hover {
+    background: #c0c4cc;
+    transform: none;
+    box-shadow: none;
+    filter: none;
+}
+
+/* 停止按钮 */
+.stop-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff3b30);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 6px 14px rgba(255, 59, 48, 0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.stop-btn:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 8px 18px rgba(255, 59, 48, 0.42);
+    filter: brightness(1.05);
+}
+
+/* 消息输入框 */
+.message-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: none;
+    overflow-y: hidden;
+    outline: none;
+    padding: 0.5rem;
+    min-height: 36px;
+    max-height: calc(var(--input-max-height) - 1rem);
+    scrollbar-width: thin;
+    scrollbar-color: #9aa8b8 var(--color-input-bg);
+}
+
+.message-input::placeholder {
+    color: var(--color-text-secondary);
+}
+
+.message-input::-webkit-scrollbar {
+    width: 10px;
+}
+
+.message-input::-webkit-scrollbar-track {
+    background: var(--color-input-bg);
+    border-radius: 999px;
+}
+
+.message-input::-webkit-scrollbar-thumb {
+    background: #9aa8b8;
+    border-radius: 999px;
+    border: 2px solid var(--color-input-bg);
+}
+
+.message-input::-webkit-scrollbar-thumb:hover {
+    background: #8798ab;
+}
+
+/* ========================================
+   8. 页脚操作与提示
+   ======================================== */
+.footer-actions {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(100% + 50px);
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0;
+    z-index: 20;
+}
+
+.input-disclaimer {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    opacity: 0.9;
+}
+
+.footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-input-bg);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.footer-btn:hover {
+    background-color: var(--color-btn-hover);
+}
+
+.footer-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.side-action-btn {
+    width: 46px;
+    height: var(--input-row-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    border-radius: 16px;
+}
+
+.input-side-actions .footer-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* 回到最新消息按钮 */
+.back-to-bottom-btn {
+    position: static;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #111111;
+    box-shadow: var(--shadow-medium);
+    z-index: 100;
+    animation: fadeIn 0.3s ease;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.back-to-bottom-btn:hover {
+    background-color: #f2f4f7;
+    transform: scale(1.1);
+}
+
+body.dark-mode .back-to-bottom-btn {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+body.dark-mode .back-to-bottom-btn:hover {
+    background-color: #1f1f1f;
+}
+
+/* ========================================
+   9. 提示框 (Toast)
+   ======================================== */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ========================================
+   10. 加载动画
+   ======================================== */
+.message-loading {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.message-loading span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    animation: bounce 1.4s infinite;
+}
+
+.message-loading span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.message-loading span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.message-loading span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   11. Markdown 标题、段落、列表、表格
+   ======================================== */
+.message-bubble h1,
+.message-bubble h2,
+.message-bubble h3,
+.message-bubble h4,
+.message-bubble h5,
+.message-bubble h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.message-bubble h1 {
+    font-size: 1.8rem;
+}
+
+.message-bubble h2 {
+    font-size: 1.6rem;
+}
+
+.message-bubble h3 {
+    font-size: 1.4rem;
+}
+
+.message-bubble h4,
+.message-bubble h5,
+.message-bubble h6 {
+    font-size: 1.2rem;
+}
+
+.message-bubble p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.message-bubble ul,
+.message-bubble ol {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.message-bubble li {
+    margin-bottom: 0.25rem;
+}
+
+.message-bubble blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1rem;
+    margin: 0.5rem 0;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.message-bubble table {
+    border-collapse: collapse;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.message-bubble table th,
+.message-bubble table td {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.message-bubble table th {
+    background-color: var(--color-input-bg);
+    font-weight: 600;
+}
+
+/* ========================================
+   12. 语法高亮（Highlight.js 集成）
+   ======================================== */
+.message-bubble pre .hljs {
+    background: transparent !important;
+    padding: 0 !important;
+    color: #1f2937;
+}
+
+.message-bubble pre .hljs-comment,
+.message-bubble pre .hljs-quote {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.message-bubble pre .hljs-keyword,
+.message-bubble pre .hljs-selector-tag,
+.message-bubble pre .hljs-literal {
+    color: #7c3aed;
+}
+
+.message-bubble pre .hljs-title,
+.message-bubble pre .hljs-title.class_,
+.message-bubble pre .hljs-title.function_,
+.message-bubble pre .hljs-function .hljs-title,
+.message-bubble pre .hljs-type,
+.message-bubble pre .hljs-built_in {
+    color: #2563eb;
+}
+
+.message-bubble pre .hljs-string,
+.message-bubble pre .hljs-regexp {
+    color: #059669;
+}
+
+.message-bubble pre .hljs-number,
+.message-bubble pre .hljs-symbol,
+.message-bubble pre .hljs-bullet {
+    color: #ea580c;
+}
+
+.message-bubble pre .hljs-variable,
+.message-bubble pre .hljs-template-variable,
+.message-bubble pre .hljs-attr,
+.message-bubble pre .hljs-attribute,
+.message-bubble pre .hljs-property,
+.message-bubble pre .hljs-params {
+    color: #c2410c;
+}
+
+.message-bubble pre .hljs-meta,
+.message-bubble pre .hljs-doctag {
+    color: #0f766e;
+}
+
+/* 深色模式语法高亮 */
+body.dark-mode .message-bubble pre .hljs {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+body.dark-mode .message-bubble pre .hljs-comment,
+body.dark-mode .message-bubble pre .hljs-quote {
+    color: #8b949e;
+}
+
+body.dark-mode .message-bubble pre .hljs-keyword,
+body.dark-mode .message-bubble pre .hljs-selector-tag,
+body.dark-mode .message-bubble pre .hljs-literal {
+    color: #c678dd;
+}
+
+body.dark-mode .message-bubble pre .hljs-title,
+body.dark-mode .message-bubble pre .hljs-title.class_,
+body.dark-mode .message-bubble pre .hljs-title.function_,
+body.dark-mode .message-bubble pre .hljs-function .hljs-title,
+body.dark-mode .message-bubble pre .hljs-type,
+body.dark-mode .message-bubble pre .hljs-built_in {
+    color: #61afef;
+}
+
+body.dark-mode .message-bubble pre .hljs-string,
+body.dark-mode .message-bubble pre .hljs-regexp {
+    color: #98c379;
+}
+
+body.dark-mode .message-bubble pre .hljs-number,
+body.dark-mode .message-bubble pre .hljs-symbol,
+body.dark-mode .message-bubble pre .hljs-bullet {
+    color: #d19a66;
+}
+
+body.dark-mode .message-bubble pre .hljs-variable,
+body.dark-mode .message-bubble pre .hljs-template-variable,
+body.dark-mode .message-bubble pre .hljs-attr,
+body.dark-mode .message-bubble pre .hljs-attribute,
+body.dark-mode .message-bubble pre .hljs-property,
+body.dark-mode .message-bubble pre .hljs-params {
+    color: #e5c07b;
+}
+
+body.dark-mode .message-bubble pre .hljs-meta,
+body.dark-mode .message-bubble pre .hljs-doctag {
+    color: #56b6c2;
+}
+
+/* ========================================
+   13. 响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 2rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .message-bubble {
+        max-width: 85%;
+    }
+
+    .main-content {
+        padding-bottom: 10px;
+    }
+
+    .input-area {
+        padding: 0.75rem;
+    }
+
+    .message {
+        gap: 0.5rem;
+    }
+
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+    }
+
+    .input-controls {
+        align-items: flex-end;
+    }
+
+    .input-main-row {
+        align-items: flex-end;
+    }
+
+    .input-side-actions {
+        align-items: flex-end;
+    }
+
+    .message-input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-text {
+        font-size: 0.85rem;
+    }
+
+    .suggestion-card {
+        padding: 1rem;
+    }
+
+    .card-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .card-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .message-bubble {
+        max-width: 90%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .input-area {
+        padding: 0.5rem;
+    }
+
+    .footer-actions {
+        gap: 0.5rem;
+    }
+
+    .footer-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
