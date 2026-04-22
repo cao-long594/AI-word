@@ -1,0 +1,61 @@
+services:
+  # 数据库服务，提供 MySQL 存储
+  db:
+    image: mysql:8.0
+    container_name: wordbook-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: wordbook
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docs/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+  # 后端服务，提供 Go API
+  backend:
+    build:
+      context: ./backend
+    container_name: wordbook-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./backend/.env
+    expose:
+      - "8080"
+    networks:
+      - app-network
+
+   # 前端服务，使用 Nginx 提供页面和统一入口
+  frontend:
+    build:
+      context: ./frontend
+    container_name: wordbook-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  # 定义项目内部共享网络
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
