@@ -2,20 +2,24 @@ import { useEffect, useState } from 'react'
 import request from './api/request'
 
 function App() {
+  const initialLoginForm = {
+    username: '',
+    password: ''
+  }
+
+  const initialRegisterForm = {
+    username: '',
+    password: ''
+  }
+
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const [username, setUsername] = useState(localStorage.getItem('username') || '')
 
   const [activeTab, setActiveTab] = useState(token ? 'search' : 'login')
 
-  const [loginForm, setLoginForm] = useState({
-    username: '',
-    password: ''
-  })
+  const [loginForm, setLoginForm] = useState(initialLoginForm)
 
-  const [registerForm, setRegisterForm] = useState({
-    username: '',
-    password: ''
-  })
+  const [registerForm, setRegisterForm] = useState(initialRegisterForm)
 
   const [queryForm, setQueryForm] = useState({
     word: '',
@@ -47,6 +51,19 @@ function App() {
     }, 2500)
   }
 
+  function resetLoginForm() {
+    setLoginForm(initialLoginForm)
+  }
+
+  function resetRegisterForm() {
+    setRegisterForm(initialRegisterForm)
+  }
+
+  function resetAuthForms() {
+    resetLoginForm()
+    resetRegisterForm()
+  }
+
   async function handleRegister(e) {
     e.preventDefault()
 
@@ -57,10 +74,7 @@ function App() {
 
       showMessage('注册成功，请登录')
       setActiveTab('login')
-      setRegisterForm({
-        username: '',
-        password: ''
-      })
+      resetAuthForms()
     } catch (err) {
       showMessage(err.message)
     } finally {
@@ -99,6 +113,7 @@ function App() {
     setUsername('')
     setQueryResult(null)
     setWords([])
+    resetAuthForms()
     setActiveTab('login')
 
     showMessage('已退出登录')
@@ -240,14 +255,20 @@ function App() {
             <>
               <button
                 className={activeTab === 'login' ? 'nav active' : 'nav'}
-                onClick={() => setActiveTab('login')}
+                onClick={() => {
+                  resetLoginForm()
+                  setActiveTab('login')
+                }}
               >
                 登录
               </button>
 
               <button
                 className={activeTab === 'register' ? 'nav active' : 'nav'}
-                onClick={() => setActiveTab('register')}
+                onClick={() => {
+                  resetRegisterForm()
+                  setActiveTab('register')
+                }}
               >
                 注册
               </button>
@@ -283,6 +304,7 @@ function App() {
                   用户名
                   <input
                     value={loginForm.username}
+                    autoComplete="username"
                     onChange={(e) =>
                       setLoginForm({
                         ...loginForm,
@@ -298,6 +320,7 @@ function App() {
                   <input
                     type="password"
                     value={loginForm.password}
+                    autoComplete="current-password"
                     onChange={(e) =>
                       setLoginForm({
                         ...loginForm,
@@ -324,6 +347,7 @@ function App() {
                   用户名
                   <input
                     value={registerForm.username}
+                    autoComplete="username"
                     onChange={(e) =>
                       setRegisterForm({
                         ...registerForm,
@@ -339,6 +363,7 @@ function App() {
                   <input
                     type="password"
                     value={registerForm.password}
+                    autoComplete="new-password"
                     onChange={(e) =>
                       setRegisterForm({
                         ...registerForm,
