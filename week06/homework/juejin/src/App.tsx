@@ -50,18 +50,19 @@ const formatDuration = (durationMs: number) => {
 
 const ASSET_PREFIX = process.env.NODE_ENV === "development" ? "/assets" : "./assets";
 const getAssetUrl = (fileName: string) => `${ASSET_PREFIX}/${fileName}`;
+const normalizeRemoteImageUrl = (url: string) => url.replace("#?", "?");
 
 const BYTETECH_ICON_URL = getAssetUrl("icon-bytetech.png");
 
 const RANK_ICON_MAP: Record<number, string> = {
-  1: getAssetUrl("rank-lv1.avis"),
-  2: getAssetUrl("rank-lv2.avis"),
-  3: getAssetUrl("rank-lv2.avis"),
-  4: getAssetUrl("rank-lv5.avis"),
-  5: getAssetUrl("rank-lv5.avis"),
-  6: getAssetUrl("rank-lv7.avis"),
-  7: getAssetUrl("rank-lv7.avis"),
-  8: getAssetUrl("rank-lv8.avis"),
+  1: getAssetUrl("rank-lv1.avif"),
+  2: getAssetUrl("rank-lv2.avif"),
+  3: getAssetUrl("rank-lv2.avif"),
+  4: getAssetUrl("rank-lv5.avif"),
+  5: getAssetUrl("rank-lv5.avif"),
+  6: getAssetUrl("rank-lv7.avif"),
+  7: getAssetUrl("rank-lv7.avif"),
+  8: getAssetUrl("rank-lv8.avif"),
 };
 
 const getRankIconUrl = (level: number) => RANK_ICON_MAP[level];
@@ -80,9 +81,10 @@ const BookletCard = ({ item }: { item: BookletItem }) => {
     <article className="flex gap-4 border-b border-jj-border py-5">
       <img
         className="h-[140px] w-[100px] rounded-md object-cover md:h-[160px] md:w-[114px]"
-        src={item.base_info.cover_img}
+        src={normalizeRemoteImageUrl(item.base_info.cover_img)}
         alt={title}
         loading="lazy"
+        referrerPolicy="no-referrer"
       />
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex items-center gap-2">
@@ -96,8 +98,9 @@ const BookletCard = ({ item }: { item: BookletItem }) => {
         <div className="mt-2 flex items-center gap-2 text-[18px] text-jj-subtext">
           <img
             className="h-6 w-6 rounded-full object-cover"
-            src={item.user_info.avatar_large}
+            src={normalizeRemoteImageUrl(item.user_info.avatar_large)}
             alt=""
+            referrerPolicy="no-referrer"
           />
           <span className="line-clamp-1 text-[#1e2738]">{authorName}</span>
           {rankIconUrl ? (
@@ -138,9 +141,10 @@ const ByteCourseCard = ({ item }: { item: ByteCourseItem }) => {
     <article className="flex gap-4 border-b border-jj-border py-5">
       <img
         className="h-[88px] w-[156px] rounded-md object-cover md:h-[128px] md:w-[228px]"
-        src={item.content.cover_image.url}
+        src={normalizeRemoteImageUrl(item.content.cover_image.url)}
         alt={title}
         loading="lazy"
+        referrerPolicy="no-referrer"
       />
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex items-center gap-2">
