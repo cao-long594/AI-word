@@ -1,0 +1,12 @@
+ode_modules/
+dist/
+test/
+coverage/
+.DS_Store
+*.log
+
+.tmp-chrome-profile/
+tmp-*.js
+tmp_*.js
+tmp-*.html
+tmp-scripts.txt

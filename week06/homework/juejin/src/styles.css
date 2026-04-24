@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  color: #1d2129;
+  background-color: #f4f5f5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+.line-clamp-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vip-borrow-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid #e9d7b5;
+  border-radius: 4px;
+  background: #f6e7cb;
+  color: #8f5f09;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.vip-free-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  padding: 0 8px;
+  border-radius: 10px 8px 8px 0;
+  background: #f6e7cb;
+  color: #8f5f09;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.course-option-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.course-option-btn-with-tag {
+  padding-right: 56px;
+}
+
+.course-option-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 20px;
+  line-height: 30px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.course-option-pill-active {
+  background: #eaf2ff;
+  color: #1d7dfa;
+  font-weight: 500;
+}
+
+.course-option-pill-inactive {
+  background: #f7f8fa;
+  color: #4e5969;
+}
+
+.course-option-btn:hover .course-option-pill-inactive {
+  background: #eef0f3;
+}
+
+.vip-free-badge-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-2px);
+  pointer-events: none;
+}
+
+.sale-tooltip-wrap {
+  display: flex;
+  line-height: 20px;
+}
+
+.sale-tooltip {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 48px 0 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(246, 66, 66, 0.25) 0%, rgba(246, 66, 66, 0) 100%);
+  color: #f64242;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
