@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片编辑器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="editor-card">
+      <h1 class="title">图片编辑器</h1>
+
+      <div class="main-content">
+        <!-- 左侧控制区 -->
+        <div class="panel controls-panel">
+          <p class="panel-title">选项</p>
+
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="brightness">亮度</button>
+            <button class="filter-btn" data-filter="saturation">饱和度</button>
+            <button class="filter-btn" data-filter="inversion">反相</button>
+            <button class="filter-btn" data-filter="grayscale">灰度</button>
+          </div>
+
+          <div class="slider-section">
+            <div class="slider-header">
+              <label for="filterSlider" id="filterName">亮度</label>
+              <span id="filterValue">100%</span>
+            </div>
+            <input
+              type="range"
+              id="filterSlider"
+              min="0"
+              max="200"
+              value="100"
+              step="1"
+              aria-label="滤镜强度"
+            >
+          </div>
+
+          <div class="rotate-section">
+            <p class="panel-subtitle">旋转 & 翻转</p>
+            <div class="transform-buttons">
+              <button id="rotateLeft" class="icon-btn" title="向左旋转">↶</button>
+              <button id="rotateRight" class="icon-btn" title="向右旋转">↷</button>
+              <button id="flipHorizontal" class="icon-btn" title="水平翻转">⇋</button>
+              <button id="flipVertical" class="icon-btn" title="垂直翻转">⇅</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧预览区 -->
+        <div class="preview-panel">
+          <div class="image-preview" id="imagePreview">
+            <img id="previewImg" src="" alt="预览图片" draggable="false" />
+            <div class="placeholder" id="placeholder">
+              <div class="placeholder-icon">🖼️</div>
+              <p>选择要编辑的图像</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部按钮 -->
+      <div class="footer-actions">
+        <button id="resetBtn" class="btn btn-light">重置选项</button>
+
+        <div class="right-actions">
+          <input type="file" id="fileInput" accept="image/*" hidden />
+          <button id="chooseBtn" class="btn btn-dark">选择图像</button>
+          <button id="saveBtn" class="btn btn-primary">保存图像</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
