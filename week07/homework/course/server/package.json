@@ -1,0 +1,20 @@
+{
+  "name": "homework-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "作业项目 - 服务端",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "@koa/router": "^13.1.0",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.15.3",
+    "koa-bodyparser": "^4.4.1",
+    "koa-static": "^5.0.0"
+  }
+}
