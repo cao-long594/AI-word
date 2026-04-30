@@ -1,0 +1,12 @@
+# =====================
+# 前端 (Client)
+# =====================
+client/node_modules
+client/dist
+
+# =====================
+# 后端 (Server)
+# =====================
+server/wte.exe
+server/wte
+
