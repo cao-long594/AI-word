@@ -1,0 +1,5 @@
+file-web/uploads/
+file-service/data/
+*.db
+*.db-shm
+*.db-wal

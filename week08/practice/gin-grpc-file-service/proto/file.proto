@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package file;
+
+option go_package = "gin-grpc-file-service/proto;filepb";
+
+service FileService {
+  rpc SaveFile(SaveFileRequest) returns (FileInfo);
+  rpc ListFiles(ListFilesRequest) returns (ListFilesResponse);
+  rpc GetFile(GetFileRequest) returns (FileInfo);
+}
+
+message SaveFileRequest {
+  string original_name = 1;
+  string stored_name = 2;
+  int64 size = 3;
+  string mime_type = 4;
+  string path = 5;
+}
+
+message FileInfo {
+  int64 id = 1;
+  string original_name = 2;
+  string stored_name = 3;
+  int64 size = 4;
+  string mime_type = 5;
+  string path = 6;
+}
+
+message ListFilesRequest {
+}
+
+message ListFilesResponse {
+  repeated FileInfo files = 1;
+}
+
+message GetFileRequest {
+  int64 id = 1;
+}
